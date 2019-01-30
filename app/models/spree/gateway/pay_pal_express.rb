@@ -134,7 +134,7 @@ module Spree
       refund_type = payment.amount == amount.to_f ? "Full" : "Partial"
 
       refund_transaction = provider.build_refund_transaction(
-        { TransactionID: payment.transaction_id,
+        { TransactionID: payment.source.transaction_id,
           RefundType: refund_type,
           Amount: {
             currencyID: payment.currency,
