@@ -16,8 +16,9 @@ SpreePaypalExpress = {
     return $('div[data-hook="checkout_payment_step"] input[type="radio"][name="order[payments_attributes][][payment_method_id]"]:checked');
   },
   hideSaveAndContinue: function() {
+    <% id = Spree::PaymentMethod.find_by(type: 'Spree::Gateway::PayPalExpress', active: true).id %>
     $("#checkout_form_payment [data-hook=buttons] input").hide();
-    $('<a id="paypal_button" rel="nofollow" data-method="post" class="btn btn-lg btn-success" href="/paypal?payment_method_id=4"><%= Spree.t(:save_and_continue) %></a>').appendTo($("#checkout_form_payment [data-hook=buttons]"));
+    $('<a id="paypal_button" rel="nofollow" data-method="post" class="btn btn-lg btn-success" href="/paypal?payment_method_id=<%= id %>"><%= Spree.t(:save_and_continue) %></a>').appendTo($("#checkout_form_payment [data-hook=buttons]"));
   },
   showSaveAndContinue: function() {
     $("#checkout_form_payment [data-hook=buttons] input").show();
